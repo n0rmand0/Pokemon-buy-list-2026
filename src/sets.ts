@@ -1,4 +1,4 @@
-export const setIds = [
+export const sets = [
   "sv08.5", // pre
   "sv09", // jtg
   "sv10", // dri

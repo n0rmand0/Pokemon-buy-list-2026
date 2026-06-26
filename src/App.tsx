@@ -5,7 +5,7 @@ import TCGdex from "@tcgdex/sdk";
 // import heroImg from "./assets/hero.png";
 import "./App.css";
 import { cards } from "./cards";
-import { setIds } from "./setIds";
+import { sets } from "./sets";
 
 // Instantiate the SDK with your preferred language
 const tcgdex = new TCGdex("en");
@@ -15,6 +15,7 @@ let setData: Record<string, any> = {};
 function App() {
   // const [isLoading, setIsLoading] = useState(true);
   const [cardData, setCardData] = useState<any[]>([]);
+  const [sortBy, setSortBy] = useState<string>("set-release-oldest");
 
   useEffect(() => {
     onLoad();
@@ -27,23 +28,23 @@ function App() {
   //   });
   // };
   // testseries();
-  const testset = async () => {
-    await tcgdex.fetch("sets", "smp").then((data) => {
-      console.log("test data:", data);
-    });
-  };
-  testset();
+  // const testset = async () => {
+  //   await tcgdex.fetch("sets", "smp").then((data) => {
+  //     console.log("test data:", data);
+  //   });
+  // };
+  // testset();
 
   const onLoad = async () => {
     try {
       const cardPromises = cards.map(
         async (card) => await tcgdex.card.get(card.id),
       );
-      const setPromises = setIds.map(
+      const setPromises = sets.map(
         async (id) => await tcgdex.fetch("sets", id),
       );
 
-      // Wait for all setIds.map promises to complete
+      // Wait for all sets.map promises to complete
       await Promise.all(setPromises).then((results) => {
         results.forEach((set) => {
           if (set) setData[set.id] = set;
@@ -57,6 +58,11 @@ function App() {
           ...apiCard,
           ...cards[index],
         }));
+        combinedData.sort(
+          (a, b) =>
+            new Date(a.localId || 0).getTime() -
+            new Date(b.localId || 0).getTime(),
+        );
         setCardData(combinedData); //
         console.log("Card Data loaded:", combinedData);
       });
@@ -133,12 +139,65 @@ function App() {
     );
   };
 
-  const cardGrid = () => cardData.map((card, key) => cardUI(card, key));
+  const getSortedData = () => {
+    const dataCopy = [...cardData];
+    switch (sortBy) {
+      case "market-low":
+        return dataCopy.sort(
+          (a, b) =>
+            (a.pricing.tcgplayer?.holofoil.marketPrice || 0) -
+            (b.pricing.tcgplayer?.holofoil.marketPrice || 0),
+        );
+      case "market-high":
+        return dataCopy.sort(
+          (a, b) =>
+            (b.pricing.tcgplayer?.holofoil.marketPrice || 0) -
+            (a.pricing.tcgplayer?.holofoil.marketPrice || 0),
+        );
+      case "set-release-newest":
+        return dataCopy.sort(
+          (a, b) =>
+            new Date(setData[b.set?.id].releaseDate || 0).getTime() -
+            new Date(setData[a.set?.id].releaseDate || 0).getTime(),
+        );
+      case "set-release-oldest":
+        return dataCopy.sort(
+          (a, b) =>
+            new Date(setData[a.set?.id].releaseDate || 0).getTime() -
+            new Date(setData[b.set?.id].releaseDate || 0).getTime(),
+        );
+      default:
+        return dataCopy;
+    }
+  };
+
+  const cardGrid = () => getSortedData().map((card, key) => cardUI(card, key));
   return (
     <>
       <header className="header">
-        <h1>Pokemon Buy List</h1>
-        <h2>Summer 2026</h2>
+        <div className="header-title">
+          <h1>Pokemon Buy List</h1>
+          <h2>Summer 2026</h2>
+        </div>
+        <div className="header-sort">
+          <label htmlFor="sort-dropdown">Sort by: </label>
+          <select
+            id="sort-dropdown"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="sort-dropdown"
+          >
+            <option value="set-release-oldest">
+              Set Release Date (Oldest)
+            </option>
+            <option value="set-release-newest">
+              Set Release Date (Newest)
+            </option>
+
+            <option value="market-low">Market Price (Low to High)</option>
+            <option value="market-high">Market Price (High to Low)</option>
+          </select>
+        </div>
       </header>
       <section className="card-grid ">{cardGrid()}</section>
     </>

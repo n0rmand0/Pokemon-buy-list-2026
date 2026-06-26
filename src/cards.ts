@@ -64,26 +64,26 @@ export const cards = [
     url: "https://www.pricecharting.com/game/pokemon-destined-rivals/misty%27s-lapras-194",
     priceHistory: { onemonth: 29.99, sixmonth: 24.5 },
   }, // mistys lapras
-  {
-    id: "sv10.5b-166",
-    url: "https://www.pricecharting.com/game/pokemon-black-bolt/zekrom-ex-166",
-    priceHistory: { onemonth: 200.24, sixmonth: 195 },
-  }, // zekrom ex
-  {
-    id: "sv10.5b-172",
-    url: "https://www.pricecharting.com/game/pokemon-black-bolt/zekrom-ex-172",
-    priceHistory: { onemonth: 441, sixmonth: 372 },
-  }, // zekrom ex
-  {
-    id: "sv10.5b-129",
-    url: "https://www.pricecharting.com/game/pokemon-black-bolt/dwebble-129?q=dwebble+129",
-    priceHistory: { onemonth: 19.41, sixmonth: 19.99 },
-  }, // dwebble
-  {
-    id: "sv10.5b-169",
-    url: "https://www.pricecharting.com/game/pokemon-black-bolt/genesect-ex-169",
-    priceHistory: { onemonth: 63.22, sixmonth: 41.87 },
-  }, // genesect ex
+  // {
+  //   id: "sv10.5b-166",
+  //   url: "https://www.pricecharting.com/game/pokemon-black-bolt/zekrom-ex-166",
+  //   priceHistory: { onemonth: 200.24, sixmonth: 195 },
+  // }, // zekrom ex
+  // {
+  //   id: "sv10.5b-172",
+  //   url: "https://www.pricecharting.com/game/pokemon-black-bolt/zekrom-ex-172",
+  //   priceHistory: { onemonth: 441, sixmonth: 372 },
+  // }, // zekrom ex
+  // {
+  //   id: "sv10.5b-129",
+  //   url: "https://www.pricecharting.com/game/pokemon-black-bolt/dwebble-129?q=dwebble+129",
+  //   priceHistory: { onemonth: 19.41, sixmonth: 19.99 },
+  // }, // dwebble
+  // {
+  //   id: "sv10.5b-169",
+  //   url: "https://www.pricecharting.com/game/pokemon-black-bolt/genesect-ex-169",
+  //   priceHistory: { onemonth: 63.22, sixmonth: 41.87 },
+  // }, // genesect ex
   {
     id: "sv10.5w-173",
     url: "https://www.pricecharting.com/game/pokemon-white-flare/reshiram-ex-173",
