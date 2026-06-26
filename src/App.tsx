@@ -20,6 +20,20 @@ function App() {
     onLoad();
   }, []);
 
+  // test
+  // const testseries = async () => {
+  //   await tcgdex.fetch("sets").then((data) => {
+  //     console.log("test data:", data);
+  //   });
+  // };
+  // testseries();
+  const testset = async () => {
+    await tcgdex.fetch("sets", "smp").then((data) => {
+      console.log("test data:", data);
+    });
+  };
+  testset();
+
   const onLoad = async () => {
     try {
       const cardPromises = cards.map(
@@ -61,9 +75,9 @@ function App() {
         ? (((sixMonthPrice - oneMonthPrice) / oneMonthPrice) * 100).toFixed(0)
         : "--";
     const appreciationMarket =
-      card.pricing.tcgplayer?.holofoil.marketPrice && sixMonthPrice
+      card.pricing?.tcgplayer?.holofoil.marketPrice && sixMonthPrice
         ? (
-            ((card.pricing.tcgplayer?.holofoil.marketPrice - sixMonthPrice) /
+            ((card.pricing?.tcgplayer?.holofoil.marketPrice - sixMonthPrice) /
               sixMonthPrice) *
             100
           ).toFixed(0)
@@ -77,7 +91,7 @@ function App() {
         <div className="card-data">
           <h3 className="card-name">{card.name}</h3>
           <p className="card-set">
-            {card.set.name} {card.localId}/{card.set.cardCount.official}
+            {card.set?.name} {card.localId}/{card.set.cardCount.official}
           </p>
           {/* <p className="card-date">Nov 12,2026</p> */}
           <p className="card-price">

@@ -94,6 +94,7 @@
   float: left;
   width: 120px;
   margin-right: 1em;
+  height: 100%;
 
   @media (max-width: 500px) {
     width: 90px;

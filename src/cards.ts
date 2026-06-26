@@ -159,4 +159,9 @@ export const cards = [
     url: "https://www.pricecharting.com/game/pokemon-phantasmal-flames/mega-charizard-x-ex-109",
     priceHistory: { onemonth: 45.32, sixmonth: 35.75 },
   }, // mega charizard
+  // {
+  //   id: "smp-SM230",
+  //   url: "https://www.pricecharting.com/game/pokemon-promo/charizard-&-braixen-gx-sm230",
+  //   priceHistory: { onemonth: 45.32, sixmonth: 35.75 },
+  // }, // braixen charizard
 ];
